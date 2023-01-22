@@ -1,2 +1,3 @@
 Hi its the readme of the repository
 learning git hub
+hi its time ti update ....
