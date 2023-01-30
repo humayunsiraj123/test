@@ -1,0 +1,38 @@
+Msg1 = A5 40 90 08 00 00 00 00 00 00 00 00 7D 
+rply = A5 01 90 08 02 7B 00 00 75 30 03 C1 24
+
+Msg2 = A5 40 91 08 00 00 00 00 00 00 00 00 7E
+rply = A5 01 91 08 0F 4E 04 0F 32 01 03 A7 8C
+
+Msg3 = A5 40 92 08 00 00 00 00 00 00 00 00 7F
+rply = A5 01 92 08 44 01 44 01 32 01 03 A7 A7
+
+Msg4 = A5 40 93 08 00 00 00 00 00 00 00 00 80
+rply = A5 01 93 08 00 01 01 2D 00 00 83 7C 6F
+
+Msg5 = A5 40 94 08 00 00 00 00 00 00 00 00 81
+rply = A5 01 94 08 10 01 00 00 02 00 03 7C D4
+
+Msg6 = A5 40 95 08 00 00 00 00 00 00 00 00 82
+rply = A5 01 95 08 01 0F 32 0F 3C 0F 42 7C 9D
+rply = A5 01 95 08 02 0F 4E 0F 4C 0F 44 7C CC
+rply = A5 01 95 08 03 0F 46 0F 32 0F 37 7C 9E
+rply = A5 01 95 08 04 0F 42 0F 38 0F 44 7C AE
+rply = A5 01 95 08 05 0F 45 0F 45 0F 4A 7C C5
+rply = A5 01 95 08 06 0F 32 0F 45 0F 4A 7C B3
+
+Msg7 = A5 40 96 08 00 00 00 00 00 00 00 00 83
+rply = A5 40 96 08 01 44 00 00 00 00 00 00 89
+rply = A5 40 96 08 02 00 00 00 00 00 00 00 46
+
+
+
+https://blog.ja-ke.tech/2020/02/07/ltt-power-bms-chinese-protocol.html
+
+https://github.com/maland16/daly-bms-uart
+
+https://github.com/softwarecrash
+
+https://forum.arduino.cc/t/uart-not-working-in-polling-mode/999283/12
+
+https://github.com/softwarecrash/daly-bms-uart/tree/main/example-sketch/daly-bms-example

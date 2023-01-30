@@ -1,0 +1,132 @@
+
+/*  uint32_t canid = makeCANID(DataIDs[i], 0x01, 0x40);
+  i = (i < 8) ? ++i : 0;
+  
+// send data:  ID = canid, Extended CAN Frame, Data length = 8 bytes, 'txbuf' = array of data bytes to send
+  byte sndStat = CAN0.sendMsgBuf(canid, 1, 8, txBuf);
+
+  if (sndStat == CAN_OK) {
+    //Serial.print("Tx ID: ");
+    //Serial.println(canid, HEX);
+  }
+  delay(1000);   // send data per 100ms
+
+  if (!digitalRead(CAN0_INT))                        // If CAN0_INT pin is low, read receive buffer
+  {
+    CAN0.readMsgBuf(&rxId, &len, rxBuf);      // Read data: len = data length, buf = data byte(s)
+
+    //Serial.print("Rx ID: ");
+    //Serial.print((rxId & 0x1FFFFFFFUL), HEX);
+    //Serial.print("  ");
+    //Serial.print(", dlc: ");
+    //Serial.print(len, HEX);
+    //Serial.print(", data: ");
+
+    for (byte i = 0; i < len; i++) {
+      //Serial.print(rxBuf[i], HEX);
+      //Serial.print(" ");
+    }
+    //Serial.print("\n");
+    //Serial.print(rxId);
+    byte c=0;
+    byte_1=rxBuf[c];
+    byte_2=rxBuf[c+1];
+    byte_3=rxBuf[c+2];
+    byte_4=rxBuf[c+3];
+    byte_5=rxBuf[c+4];
+    byte_6=rxBuf[c+5];
+    byte_7=rxBuf[c+6];
+    byte_8=rxBuf[c+7];
+    if(rxId == 2559590401){                 //from data id 0x90
+      Vt_data=(byte_1 << 8) | byte_2;
+      Vt=float(Vt_data)*0.10;
+      Serial.print("\nTotal Voltage : ");
+      Serial.print(Vt);
+      Serial.print(" v");
+      
+      Current=(byte_5 << 8) | byte_6;
+      Current=Current-30000;
+      Serial.print("\nCurrent : ");
+      Serial.print(Current);
+      Serial.print(" A");
+
+      SOC_data=(byte_7 <<8) | byte_8;
+      SOC=float(SOC_data)*0.1;
+      Serial.print("\nSOC : ");
+      Serial.print(SOC);
+      Serial.print("%");
+    }
+    
+    if(rxId == 2559655937){                    //from data id 0x91
+      max_cell_v_mv=(byte_1 << 8) | byte_2;
+      max_cell_v=float(max_cell_v_mv)/1000.00;
+      Serial.print("\nMaximum Cell Voltage : ");
+      Serial.print(max_cell_v);
+      Serial.print(" v");
+
+      no_max_cell_v=byte_3;
+      Serial.print("\nNo of Cells with Maximum Voltage : ");
+      Serial.print(no_max_cell_v);
+      
+      min_cell_v_mv=(byte_4 << 8) | byte_5;
+      min_cell_v=float(min_cell_v_mv)/1000.00;
+      Serial.print("\nMinimum Cell Voltage : ");
+      Serial.print(min_cell_v);
+      Serial.print(" v");
+      no_min_cell_v=byte_6;
+      Serial.print("\nNo of Cells with Minimum Voltage : ");
+      Serial.print(no_min_cell_v);
+    }
+    
+    if(rxId == 2559721473){                   //from data id 0x92
+
+      max_temp=byte_1;
+      max_temp=max_temp-40;
+      Serial.print("\nMaximum Cell Temperature : ");
+      Serial.print(max_temp);
+      Serial.print(" °C");
+
+      max_temp_cell_no=byte_2;
+      Serial.print("\nMaximum Temperature Cell N0 : ");
+      Serial.print(max_temp_cell_no);
+
+      min_temp=byte_3;
+      min_temp=min_temp-40;
+      Serial.print("\nMinimum Cell Temperature : ");
+      Serial.print(min_temp);
+      Serial.print(" °C");
+
+      min_temp_cell_no=byte_4;
+      Serial.print("\nMaximum Temperature Cell N0 : ");
+      Serial.print(min_temp_cell_no);
+      
+    }
+
+    if(rxId == 2559787009){                            //from data id 0x93
+
+      state=byte_1;
+      if(state == 0){
+        Serial.print("\nState : Stationary");
+        }
+      else if(state == 1){
+        Serial.print("\nState : Charging");
+        }
+      else if(state == 2){
+        Serial.print("\nState : Discharging");
+        }
+      charge_mos_state=byte_2;
+      Serial.print("\nCharge_MOS_State : ");
+      Serial.print(charge_mos_state);
+      discharge_mos_state=byte_3;
+      Serial.print("\nDischarge_MOS_State : ");
+      Serial.print(discharge_mos_state);
+      BMS_life=byte_4;
+      Serial.print("\nCycles : ");
+      Serial.print(BMS_life);
+      remaining_capacity_mah=(byte_5 << 24) | (byte_6 << 16) | (byte_7 << 8) | (byte_8);
+      remaining_capacity_ah=float(remaining_capacity_mah)/1000.00;
+      Serial.print("\nremaining_capacity : ");
+      Serial.print(remaining_capacity_ah);
+      }
+  }
+    Serial.println();*/

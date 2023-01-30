@@ -1,0 +1,122 @@
+void led_deinit(void)
+void led_init(void)
+void SEND_TO_LCD(char DATA,int RS)
+void LCD_SEND_CMD(char CMD)
+void LCD_SEND_DATA(char DATA)
+void LCD_CLEAR(void)
+void SET_CURSOR(int row,int col)
+void LCD_INIT(void)
+void LCD_SEND_STRING(char *str)
+
+
+void led_init(void)
+{HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,1);
+
+	}
+void led_deinit(void)
+{HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,0);
+	}
+
+void SEND_TO_LCD(char DATA,int RS)
+{
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_1,RS);
+
+
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_4,((DATA>>0)&0x01));
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_5,((DATA>>1)&0x01));
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_6,((DATA>>2)&0x01));
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_7,((DATA>>3)&0x01));
+
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,1);
+	HAL_Delay(20);
+	HAL_GPIO_WritePin(GPIOA,GPIO_PIN_2,0);
+	HAL_Delay(20);
+
+
+	}
+
+void LCD_SEND_CMD(char CMD){
+	char datatosend;
+	datatosend=((CMD>>4)&0x0f);
+	SEND_TO_LCD(datatosend,0);
+
+	datatosend=((CMD)&0x0f);
+	SEND_TO_LCD(datatosend,0);
+}
+
+
+void LCD_SEND_DATA(char DATA){
+
+
+	char datatosend;
+	datatosend=((DATA>>4)&0x0f);
+	SEND_TO_LCD(datatosend,1);
+
+	datatosend=((DATA)&0x0f);
+	SEND_TO_LCD(datatosend,1);
+}
+
+
+
+void LCD_CLEAR(void){
+	LCD_SEND_CMD(0x01);
+	HAL_Delay(2);
+}
+
+void SET_CURSOR(int row,int col){
+
+	switch(row){
+	case(0):
+			col|=0x80;
+			break;
+	case(1):
+			col|=0xC0;
+			break;
+
+	case(2):
+			col|=0xC0;
+			break;
+	case(3):
+			col|=0xC0;
+			break;
+
+
+	}
+}
+
+void LCD_INIT(void){
+
+	HAL_Delay(50);
+	LCD_SEND_CMD(0x30);
+
+	HAL_Delay(5);
+	LCD_SEND_CMD(0x30);
+	HAL_Delay(1);
+	LCD_SEND_CMD(0x30);
+	HAL_Delay(10);
+	LCD_SEND_CMD(0x30);
+	HAL_Delay(10);
+	LCD_SEND_CMD(0x20); //4bit mode
+
+	//DISPLAY init
+	LCD_SEND_CMD(0x28);
+	HAL_Delay(1);
+
+	LCD_SEND_CMD(0x08);
+	HAL_Delay(1);
+
+	LCD_SEND_CMD(0x01);
+	HAL_Delay(2);
+
+	LCD_SEND_CMD(0x06);
+	HAL_Delay(1);
+
+	LCD_SEND_CMD(0x0C);
+	HAL_Delay(1);
+
+}
+
+void LCD_SEND_STRING(char *str)
+{
+	while(*str) LCD_SEND_DAT(*str++);
+}

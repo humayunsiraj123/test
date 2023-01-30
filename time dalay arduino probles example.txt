@@ -1,0 +1,76 @@
+https://how2electronics.com/interfacing-mcp2515-can-bus-module-with-arduino/
+
+initial on  for 1 min if condtion true on else off 
+5 min wait  again test off 
+
+
+
+unsigned loog Ctime ;
+unsigned long ptime;
+
+if(Ctime-ptime<=1000){
+if (digital read ==1){
+mos}
+}
+
+
+the typical loop you are looking for is BlinkWithoutDelay.
+
+there is a system time millis() that counts in microseconds.
+
+you can note that time
+
+then = millis() ;
+duration = millis() - then ;
+
+but, that would just refresh each loop. and you want to create a delay anyway.
+
+lets use a value.
+
+int period = 1000 ; put before setup.
+int then, duration ;
+
+in loop() put this
+
+duration = millis() - then ;
+
+if (duration >= period )
+{
+// do that thing you want to do ;
+then = millis(); // starts the timer all over again
+}
+
+just change the period to whatever you need.
+as a note, this is only for very short timing periods.
+for longer periods, you would want to use unsigned long and not int
+
+blink without delay has many-many variations. this is just a simple one.
+
+duration = millis() - then ;
+if (duration >= period ) {
+// do that thing you want to do
+then = millis(); // starts the timer all over again
+count++ ; // increments a counter each period
+}
+
+if (count >= 60) {
+// read temperature
+count = 0 ;
+}
+
+this sequence does a thing each second ( whatever your period is)
+then increments count
+and after 60 seconds, it would read the temperature.
+
+same stuff to increment count.... and add count_HR before setup
+
+if (count >= 60) {
+// read soil moisture
+count = 0 ; // reset
+count_HR++ ;
+}
+
+if ( count_HR == 24) {
+// send daily temperature to web data logger
+count_HR = 0 ; // reset
+}

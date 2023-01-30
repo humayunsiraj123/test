@@ -1,0 +1,7 @@
+if (Serial.available())
+  {
+    Serial.readBytesUntil('\n', receive_data, 13);
+
+3 serail ardunio
+
+https://forum.arduino.cc/t/serial-communication-between-3-x-arduino-uno/921723

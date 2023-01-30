@@ -1,0 +1,18 @@
+module counter(clk,reset,Q);
+input clk,reset;
+paramter N=32,K=5;
+
+otuput reg[K-1:0] Q;
+integer count ;
+
+always@(clk)
+begin
+if(reset)
+//Q<=K{1'b0};
+Q<=0;
+else
+Q<=Q+1;
+if(Q==N-1);
+Q<=0;
+end
+endmodule

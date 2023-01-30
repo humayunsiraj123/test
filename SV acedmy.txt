@@ -1,0 +1,45 @@
+// Code your design here
+module adder#(paramter N=4)(A,B,Cin,SUM,Cout);
+  input logic [N-1:0]A,B;
+  input logic Cin;
+  output  logic Cout;
+  output logic [N-1:0]SUM;
+  
+  always_comb {Cout,Sum}=A+B+Cin;
+  
+endmodule: adder
+  
+
+
+// Code your testbench here
+// or browse Examples
+ module tb;
+   logic [15:0]A,B,S;
+   logic Cin,Cout;
+   
+   adder#(.N(16)) adder1(.A(A),.B(B),Cin(Cin),.Cout(Cout));
+    initial begin
+      $dumpfile("dump.vcd");
+      $dumpvars(1,tb);
+      
+      #10;
+      a=16'd10;
+      b=16'd15;
+      Cin=1'b0;
+      
+      
+      #10;
+      a='d72;
+      b=16'd23;
+      Cin=1'b1;
+      
+      
+      #10;
+      a=16'hffff;
+      b=16'hffff;
+      Cin=1'b0;
+    end
+ endmodule :tb;
+      
+      
+      

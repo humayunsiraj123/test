@@ -1,0 +1,45 @@
+#include <Arduino.h>
+#include <SoftwareSerial.h>
+
+SoftwareSerial comm(5,6);
+
+
+void setup() {
+  comm.begin(9600);
+}
+
+void loop() {
+  comm.println("From Arduino"); // send to ESP
+
+  char buffer[20] = "";
+  if (Serial.available())
+  {
+    Serial.readBytesUntil('\n', buffer, 20);
+    Serial.println(buffer); // recieve from ESP
+  }
+
+  delay(1000);
+}
+
+
+
+#include <Arduino.h>
+
+void setup()
+{
+  Serial1.begin(9600);
+
+}
+
+void loop()
+{
+  Serial1.println("From ESP"); // send to Arduino 
+
+  char buffer[20] = "";
+  if (Serial.available())
+  {
+    Serial.readBytesUntil('\n', buffer, 20);
+    Serial.println(buffer); // recieve from Arduino 
+  }
+  delay(1000);
+}

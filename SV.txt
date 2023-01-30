@@ -1,0 +1,145 @@
+******************randomization************** 
+for verfiaciton testing 
+using constrainst to define range of variable or fixing it 
+protperties defininfing vcariabels
+rand for random no 
+ranc for random no but repeatation of random value after one the all the no in the range ha been use
+ 
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+
+
+class myclass;
+  //propeeties 
+  rand bit [3:0] a;
+  rand bit [3:0] b; 
+  
+  constraint c1{
+a>1 && a<9;
+    b==3;
+    
+  }
+  
+  endclass
+module top;
+  myclass c;
+  initial begin
+    repeat(10) begin
+      
+  c = new();
+  c.randomize();
+  
+      $display("the value of c when a =  %d  and b =  %d",c.a,c.b);end
+      
+  end
+  endmodule
+  
+  2222222222222222222222222222
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+// Code your testbench here
+// or browse Examples
+
+
+class myclass;
+  //propeeties 
+  randc bit [3:0] a;
+  randc bit [3:0] b; 
+  //constraint
+  /*constraint c1{
+a>1 && a<9;
+    b>3 && b<14;
+    
+  }*/
+  
+ /* function pre_randomize();
+    a=10;
+    a.rand_mode(0);
+    b=10;
+    $display("the vlaue of a = %d and b = %d",a,b);  
+  endfunction
+  */
+  function post_randomize();
+  
+    $display("the vlaue of a = %d and b = %d",a,b);  
+  endfunction
+  
+  endclass
+module top;
+  myclass c;
+  initial begin
+    //repeat(10) begin
+      
+  c = new();
+  c.randomize();
+  
+    $display("the value of c when a =  %d  and b =  %d",c.a,c.b);//end
+      
+  end
+  endmodule
+  
+  ....................................................
+
+class my ;
+  randc bit [4:0]a;
+  randc bit [3:0]b;
+  /*
+  function post_randomize;
+    a=4;
+    b=10;
+    $dispaly(" the post randomized a= %d, b=%d",a,b);
+    endfunction
+  */
+  constraint c1{a>2 &&a<14;
+                b>5 && b<9;};
+endclass
+
+module m1;
+  my O1;
+  initial begin
+    repeat(10)begin
+  O1=new();
+    O1.randomize();
+    $display(" the valeu of a= %d and b= %d",O1.a,O1.b);
+    end
+  end
+endmodule
+-------------------------------
+
+//weighted constraints using //:= paramterwith keyword dist
+//means how many time specifc value to be occur with keyword dist
+
+class my ;
+  randc bit [4:0]a;
+  randc bit [3:0]b;
+  /*
+  function post_randomize;
+    a=4;
+    b=10;
+    $dispaly(" the post randomized a= %d, b=%d",a,b);
+    endfunction
+  */
+  constraint c1{a dist{3:=6,2:=4};};
+endclass
+
+module m1;
+  my O1;
+  initial begin
+    O1=new();
+    repeat(10)begin
+  
+    O1.randomize();
+    $display(" the valeu of a= %d and b= %d",O1.a,O1.b);
+    end
+  end
+endmodule
