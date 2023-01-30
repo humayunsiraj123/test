@@ -1,0 +1,23 @@
+  lcd_init();
+  lcd_send_cmd(0x80|0x00);
+  lcd_send_string("BLDC MOTOR CONTROL");
+
+   lcd_send_cmd(0x80|0x40);
+   lcd_send_string("TESTING LCD WITh I2C");
+
+   lcd_send_cmd(0x80|0x1C);
+   lcd_send_string("WITH ADC AND UART ");
+
+   lcd_send_cmd(0x80|0x40);
+   lcd_send_string("STM32 NUCLEO BOARD");
+   for(int i=0;i<20;i++){
+	   lcd_send_cmd(0x1C);
+	   HAL_Delay(50);
+
+   }
+
+   for(int i=0;i<20;i++){
+   	   lcd_send_cmd(0x18);
+   	   HAL_Delay(50);
+
+      }
