@@ -1,0 +1,490 @@
+#include <iostream>
+using namespace std;
+
+class Employee 
+{public:
+    string name; 
+    int age;
+    string  type; 
+
+    void introduction(){
+        cout<<"Hi i am "<<name<<" with age  "<<age<< " and i am "<<type<<endl;
+
+    }
+    //construtor
+        Employee(string Name,string Type,int Age){
+        name=Name;
+        type=Type;
+        age=Age;
+    }
+
+};
+
+
+int main(){
+    Employee employee1=Employee("ALI","INTERN",20);
+    Employee employee2=Employee("AHmed","pre",22);
+
+    /*employee1.name="ALi";
+    employee1.age=20;
+    employee1.type="contract";
+    //cout<<"Hi i am"<<employee1.name<<" with age  "<<employee1.age<< "and i am "<<employee1.type<<endl;
+    */
+    employee1.introduction();
+    employee2.introduction();
+
+    // 
+return 0;}
+
+
+
+
+
+#include <iostream>
+using namespace std;
+//with get  set fucntion
+//Encapsulation si basically enclosing some of your class data and make it private so no can directly access it or through consctructor
+//so it need to access th private data through getter and setter sfucntions 
+class Employee 
+{private:
+    string name; 
+    int age;
+    string  type; 
+public:
+    string getname(){
+        return name;
+    }
+    void setname(string Name){
+    name=Name;}
+
+
+    int getAge(){
+        return age;
+    }
+    void setAge(int Age){
+    if(Age>=18)
+        age=Age;
+    }
+
+
+    void introduction(){
+        cout<<"Hi i am "<<name<<" with age  "<<age<< " and i am "<<type<<endl;
+
+    }
+    
+    Employee(string Name,string Type,int Age){
+        name=Name;
+        type=Type;
+        age=Age;
+    }
+
+};
+
+
+int main(){
+    Employee employee1=Employee("ALI","INTERN",20);
+    Employee employee2=Employee("AHmed","pre",22);
+
+    /*employee1.name="ALi";
+    employee1.age=20;
+    employee1.type="contract";
+    //cout<<"Hi i am"<<employee1.name<<" with age  "<<employee1.age<< "and i am "<<employee1.type<<endl;
+    */
+    employee1.introduction();
+    employee2.introduction();
+    //cout<<employee1.name; NOT WORKING BCZ PRIVATE VAR
+    employee1.setname("KHAN");
+
+    cout<<"updated name is "<<employee1.getname()<<endl;
+    //check age limitation;
+    employee2.setAge(17);
+    employee1.setAge(100);
+//as age is below the limt so all the values is same above the range
+    cout<<"Employee 1 updates AGe is "<<employee1.getAge() <<endl; 
+    cout<<"Employee 2 updates AGe is "<<employee1.getAge() <<endl;
+return 0;}
+
+
+
+#include <iostream>
+using namespace std;
+/*inherticane aqxcuring attrribyute and methods of base class anfd using 
+in your sub class along wiht the constructor building of child class 
+also applied concept of protected constructor where we can assces atrribue of base class whihc aws private so to 
+change private class to protected class we can access the property ffrom the base class of the
+at child class like follows*/
+class Askforpromotion{
+    public :
+        virtual void askforpromotion()=0;
+};
+
+class Employee :Askforpromotion{
+private: 
+    
+    string Company;
+    int Age;
+protected:
+string Name;
+public:
+    string getName(){
+        return Name;
+    }
+    void setName(string name){
+        Name=name;
+    }
+    string getCompany(){
+        return Company;
+    }
+    void setcompany(string name){
+        Company=name;
+    }
+    int getAge(){
+        return Age;
+    }
+    void setName(int age){
+        Age=age;
+    }
+    Employee(string name,string company,int age){
+        Name=name;
+        Company=company;
+        Age=age;
+    }
+    void introduction(){
+        cout<<"Hello Mr/Ms " <<getName()<<"\n";
+        cout<<"From " <<getCompany()<<"\n";
+        cout<<"Your are  " <<getAge()<<"\n";
+
+
+ }
+    void askforpromotion(){
+        if(getAge()>18){
+            cout<<"Hello Mr/Ms " <<getName()<< " Congration you are promoted "<<endl;
+
+        }
+        else
+            cout<<"Hello Mr/Ms" <<getName()<< " soory your are not elagibale of rthe promotion "<<endl;
+
+    }
+
+
+};
+
+class Developer: public Employee{//i have make class public so proppeorties like ask for pormotion make accesible to class developer
+    public:
+        string Planguage; 
+        Developer(string name,string company,int age,string planguage):
+            Employee(name,company,age)
+            {
+            Planguage=planguage;};
+        void DevDet(){
+            {//here NAme is accessbile directly because protection construtor has been used
+             cout<<"MR "<<Name<<"From  "<<getCompany()<<" your are "<<getAge()<<"and you like programming "<<Planguage<<endl;
+
+            } 
+            
+
+        }
+        
+
+
+};
+class Teacher :public  Employee{
+    public:
+        string Subject;
+        Teacher(string name,string company,int age,string sub):Employee(name,company,age){
+            Subject=sub;
+        };
+        void Preparation(){
+                cout<<Name<<" is going to teach "<<Subject<<endl;
+            }
+};
+
+
+int main(){
+Employee employee1=Employee("Ali","dell",19);
+employee1.introduction();
+employee1.askforpromotion();
+Developer dev1=Developer("Abs","dell",19,"python");
+dev1.askforpromotion();//to acces other properties we have public the base class in developer class while attr can be access using making protected attr of base class
+Teacher teacher1=Teacher("AHEMD","aBC",27,"maths");
+cout<<teacher1.Subject;
+teacher1.Preparation();
+teacher1.askforpromotion();
+
+return 0;
+}
+
+
+
+
+//#include<iostream>
+//#include <conio.h>
+//#include <string.h>
+
+#include<string>
+class Stack{
+    private:
+        int top;
+        int n;
+        int arr[];
+    public:
+        Stack(){
+        n=5;
+        top=-1;
+        for(int i=0;i<n;i++){
+            arr[i]=0;
+        }
+        }
+
+    bool isnull(){
+        if(top==-1)
+            {cout<<"yes its is NULL"<<endl;
+            return true;}
+        else{cout<<"No ITS filled"<<endl;
+            return false;}    
+    }
+
+    bool isfull(){
+        if(top==n-1)
+            {cout<<"yes its is FULL"<<endl;
+            return true;}
+        else{cout<<"No its no filled"<<endl;
+            return false;}        }
+
+    void push(int value){
+        if(!isfull()){
+            top++;
+            arr[top]=value;
+
+        }
+        else
+            cout<<"the stack is full \n";
+       
+    }
+    int pop(){int result;
+        if(isnull()){
+            cout<<"the stack is empyth\n";
+        }
+        else{            result=arr[top];
+            top--;
+    }
+        return result
+            
+    }
+    
+    int count(){
+        return(top+1);
+
+    }
+
+    int peek(int index){
+        int result;
+        if(isnull()){
+            cout<<"the stack is empyth\n";
+    }   
+        else
+        result=arr[index];
+    return result;
+
+}
+
+ void change(int pos,int val){
+    arr[pos]=value;
+    cout<<"the value has been change\n";
+ }
+
+ void display(){
+    
+    for(int i=0;i<n;i++){
+        cout<<"At position = "< i<" value ="<arr[i]<endl;
+    }
+
+ }
+
+};
+ int main(){
+    Stack s1;
+    int pos,option ,value;
+
+    do{
+        cout<<"what o[perationyou want to do :"<<endl;
+        cout<<"1 for PuSh :"<<endl;
+        cout<<"2 for pop :"<<endl;
+        cout<<"3 for isnull() :"<<endl;
+        cout<<"4 for isfull() :"<<endl;
+        cout<<"5 for count() :"<<endl;
+        cout<<"6 for change():"<<endl;
+        cout<<"7 for dsiaply():"<<endl;
+        cout<<"8 for peek():"<<endl;
+        
+        cout<<"q for quitt:"<<endl;
+
+        cin>>option;
+        switch (option){
+            case 1:{int value;
+
+            cout<<"enter the value to be push";
+            cin>>value;
+            s1.push(value);
+            break;}
+        case 2:{int value;
+
+            cout<<"the pop value result is;\n";
+            
+            value=s1.pop();
+            break;}
+        
+        }
+        case 5:{
+            cout<<"the no of count is ="<<s1.count();
+        break;
+        }
+case 3:{s1.isnull();
+            break;
+        }
+case 4:{s1.isfull();
+            break;
+        }
+
+        case 6:{
+            int pos,value;
+            cout<<"enter the possition ";
+            cin>>pos;
+
+            cout<<"enter the value ";
+            cin>>value;
+            s1.change(pos,value);
+            break;
+
+        }
+
+        case 7:{
+            s1.display();
+            break;
+
+        }
+
+        case 8:{
+            int pos;
+            cout<<"enter the positon to peek";
+            cin>>pos;
+            cout<< "the value at peek pos ="<<pos << " is  ="<<s1.peek(pos)<<endl;;
+        }
+    default:
+    cout<<"invalid entery";
+
+    }
+    while(option=!q);
+
+    return;
+
+    
+ }
+
+
+
+
+    
+#include <iostream>
+using namespace std;
+//with get  set fucntion
+/*ABStraction is basically hiding complex or essentail part of your code na donly 
+dispalying the simple one means only related function or data is to be display
+and it si essentail to use the method if abstratc any in signing class 
+*/
+class AbstractEmployee{
+    virtual void Askforpromotion()=0;
+};
+
+
+class Employee :AbstractEmployee{
+public:
+    string name; 
+    int age;
+    string  type; 
+public:
+    string getname(){
+        return name;
+    }
+    void setname(string Name){
+    name=Name;}
+
+
+    int getAge(){
+        return age;
+    }
+    void setAge(int Age){
+    if(Age>=18)
+        age=Age;
+    }
+
+
+    void introduction(){
+        cout<<"Hi i am "<<name<<" with age  "<<age<< " and i am "<<type<<endl;
+
+    }
+
+    void Askforpromotion(){
+        if(age>35){
+            cout<<"Hello Mr/Ms "<< name<<" you got promoted"<<endl;
+        
+        }
+        else
+        {
+            cout<<"Hello Mr/Ms "<< name<<" sorry you can get promoted"<<endl;
+        
+        }
+        
+    }
+    
+    Employee(string Name,string Type,int Age){
+        name=Name;
+        type=Type;
+        age=Age;
+    }
+
+};
+
+
+int main(){
+    Employee employee1=Employee("ALI","INTERN",23);
+    Employee employee2=Employee("AHmed","pre",38);
+    employee1.Askforpromotion();
+    employee2.Askforpromotion();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*employee1.name="ALi";
+    employee1.age=20;
+    employee1.type="contract";
+    //cout<<"Hi i am"<<employee1.name<<" with age  "<<employee1.age<< "and i am "<<employee1.type<<endl;
+    
+    employee1.introduction();
+    employee2.introduction();
+    //cout<<employee1.name; NOT WORKING BCZ PRIVATE VAR
+    employee1.setname("KHAN");
+    cout<<"updated name is "<<employee1.getname()<<endl;
+    //check age limitation;
+    employee2.setAge(17);
+    employee1.setAge(100);
+//as age is below the limt so all the values is same above the range
+    cout<<"Employee 1 updates AGe is "<<employee1.getAge() <<endl; 
+    cout<<"Employee 2 updates AGe is "<<employee1.getAge() <<endl;*/   
+return 0;}
+
